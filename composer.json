@@ -22,5 +22,8 @@
 			"email": "john.bloch@10up.com",
 			"role" : "developer"
 		}
-	]
+	],
+	"require-dev": {
+		"10up/wp_mock": "dev-master"
+	}
 }
