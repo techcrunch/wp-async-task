@@ -1,0 +1,26 @@
+{
+	"name"             : "techcrunch/wp-async-task",
+	"description"      : "Run asynchronous tasks for long-running operations in WordPress",
+	"minimum-stability": "dev",
+	"license"          : "GPL-2.0+",
+	"authors"          : [
+		{
+			"name": "Alex Khadiwala",
+			"role": "developer"
+		},
+		{
+			"name": "Nicolas Vincent",
+			"role": "developer"
+		},
+		{
+			"name" : "Eric Mann",
+			"email": "eric.mann@10up.com",
+			"role" : "developer"
+		},
+		{
+			"name" : "John P. Bloch",
+			"email": "john.bloch@10up.com",
+			"role" : "developer"
+		}
+	]
+}
