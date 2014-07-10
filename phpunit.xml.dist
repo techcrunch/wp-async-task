@@ -1,0 +1,9 @@
+<phpunit
+		bootstrap="./tests/bootstrap.php.dist"
+		colors="true">
+	<testsuites>
+		<testsuite>
+			<directory suffix="tests.php">./tests/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>
