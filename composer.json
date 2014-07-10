@@ -23,7 +23,10 @@
 			"role" : "developer"
 		}
 	],
-	"require-dev": {
+	"require-dev"      : {
 		"10up/wp_mock": "dev-master"
+	},
+	"autoload"         : {
+		"classmap": ["wp-async-task.php"]
 	}
 }
