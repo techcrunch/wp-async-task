@@ -24,7 +24,8 @@
 		}
 	],
 	"require-dev"      : {
-		"10up/wp_mock": "dev-master"
+		"10up/wp_mock"   : "dev-master",
+		"phpunit/phpunit": "*@stable"
 	},
 	"autoload"         : {
 		"classmap": ["wp-async-task.php"]
