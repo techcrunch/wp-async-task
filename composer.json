@@ -30,5 +30,8 @@
 	},
 	"autoload"         : {
 		"classmap": ["wp-async-task.php"]
+	},
+	"autoload-dev"     : {
+		"classmap": ["tests/phpunit/mocks/"]
 	}
 }
