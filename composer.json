@@ -3,6 +3,7 @@
 	"description"      : "Run asynchronous tasks for long-running operations in WordPress",
 	"minimum-stability": "dev",
 	"license"          : "GPL-2.0+",
+	"type"             : "wordpress-plugin",
 	"authors"          : [
 		{
 			"name": "Alex Khadiwala",
