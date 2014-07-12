@@ -85,7 +85,7 @@ class WP_Async_Task_Tests extends TestCase {
 			->andThrow( 'Exception' );
 		$async->shouldReceive( 'create_async_nonce' )->never();
 		/** @var Async $async */
-		$async->launch();
+		$async->launch( $arg1, $arg2 );
 		$this->assertConditionsMet();
 	}
 
@@ -110,7 +110,7 @@ class WP_Async_Task_Tests extends TestCase {
 		WP_Mock::expectActionAdded( 'shutdown', array( $async, 'launch_on_shutdown' ) );
 
 		/** @var Async $async */
-		$async->launch();
+		$async->launch( $arg );
 
 		$data = $body_data->getValue( $async );
 
