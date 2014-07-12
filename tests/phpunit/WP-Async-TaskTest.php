@@ -58,7 +58,7 @@ class WP_Async_Task_Tests extends TestCase {
 		WP_Mock::expectActionAdded( 'async', array( $async, 'launch' ), 10, 20 );
 		WP_Mock::expectActionAdded( 'admin_post_nopriv_wp_async_async', array( $async, 'handle_postback' ) );
 
-		$async->__construct( WP_Async_Task::LOGGED_IN );
+		$async->__construct( WP_Async_Task::LOGGED_OUT );
 
 		$this->assertConditionsMet();
 	}
