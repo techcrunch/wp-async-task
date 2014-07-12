@@ -407,6 +407,7 @@ class WP_Async_Task_Tests extends TestCase {
 		$mockClass = "$class$stub";
 		/** @var \Mockery\Mock $mock */
 		$mock = Mockery::mock( $mockClass, array( $auth ) );
+		$mock->makePartial();
 		$mock->shouldAllowMockingProtectedMethods();
 		return $mock;
 	}
