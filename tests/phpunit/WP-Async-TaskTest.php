@@ -139,9 +139,16 @@ class WP_Async_Task_Tests extends TestCase {
 			'random'       => rand( 0, 999999 ),
 			'array'        => array( 'not', 'scalar' ),
 		);
-		$cookie_header = '_some_cookie=Value; foo=bar; random=';
-		$cookie_header .= $_COOKIE['random'] . '; array=';
-		$cookie_header .= serialize( $_COOKIE['array'] );
+		$cookie_header = '';
+		array_walk( $_COOKIE, function ( $value, $key ) use ( &$cookie_header ) {
+			if ( ! empty( $cookie_header ) ) {
+				$cookie_header .= '; ';
+			}
+			if ( ! is_scalar( $value ) ) {
+				$value = serialize( $value );
+			}
+			$cookie_header .= "$key=" . urlencode( $value );
+		} );
 
 		$verify_ssl = (bool) rand( 0, 1 );
 		WP_Mock::onFilter( 'https_local_ssl_verify' )->with( true )->reply( $verify_ssl );
