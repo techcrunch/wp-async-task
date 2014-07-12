@@ -6,4 +6,9 @@
 			<directory suffix="Test.php">./tests/phpunit/</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist>
+			<file>./wp-async-task.php</file>
+		</whitelist>
+	</filter>
 </phpunit>
