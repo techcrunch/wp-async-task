@@ -166,11 +166,8 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 			}
 			$action = "wp_async_$action";
 			$i      = wp_nonce_tick();
-			if ( is_user_logged_in() ) {
-				return wp_create_nonce( $action );
-			}
 
-			return substr( wp_hash( $i . $action, 'nonce' ), - 12, 10 );
+			return substr( wp_hash( $i . $action . get_class( $this ), 'nonce' ), - 12, 10 );
 		}
 
 		/**
@@ -193,17 +190,14 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 			}
 			$action = "wp_async_$action";
 			$i      = wp_nonce_tick();
-			if ( is_user_logged_in() ) {
-				return wp_verify_nonce( $nonce, $action );
-			}
 
 			// Nonce generated 0-12 hours ago
-			if ( substr( wp_hash( $i . $action, 'nonce' ), - 12, 10 ) == $nonce ) {
+			if ( substr( wp_hash( $i . $action . get_class( $this ), 'nonce' ), - 12, 10 ) == $nonce ) {
 				return 1;
 			}
 
 			// Nonce generated 12-24 hours ago
-			if ( substr( wp_hash( ( $i - 1 ) . $action, 'nonce' ), - 12, 10 ) == $nonce ) {
+			if ( substr( wp_hash( ( $i - 1 ) . $action . get_class( $this ), 'nonce' ), - 12, 10 ) == $nonce ) {
 				return 2;
 			}
 
