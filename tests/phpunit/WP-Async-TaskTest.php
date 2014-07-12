@@ -305,32 +305,6 @@ class WP_Async_Task_Tests extends TestCase {
 		$this->assertConditionsMet();
 	}
 
-	public function test_create_async_nonce_nopriv() {
-		$async      = $this->getMockAsync();
-		$nonce_tick = rand( 10, 99 );
-		WP_Mock::wpFunction( 'wp_nonce_tick', array(
-			'times'  => 1,
-			'args'   => array(),
-			'return' => $nonce_tick,
-		) );
-		$action = new ReflectionProperty( 'Async', 'action' );
-		$action->setAccessible( true );
-		$action->setValue( $async, 'nopriv_async' );
-		$create_nonce = new ReflectionMethod( 'Async', 'create_async_nonce' );
-		$create_nonce->setAccessible( true );
-
-		$expected_hash = md5( $nonce_tick . 'wp_async_async' . get_class( $async ) );
-
-		WP_Mock::wpFunction( 'wp_hash', array(
-			'times'  => 1,
-			'args'   => array( $nonce_tick . 'wp_async_async' . get_class( $async ), 'nonce' ),
-			'return' => $expected_hash,
-		) );
-
-		$this->assertEquals( substr( $expected_hash, - 12, 10 ), $create_nonce->invoke( $async ) );
-		$this->assertConditionsMet();
-	}
-
 	public function test_verify_async_nonce_invalid() {
 		$async      = $this->getMockAsync();
 		$nonce_tick = rand( 10, 99 );

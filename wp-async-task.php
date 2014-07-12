@@ -160,11 +160,7 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		 * @return string The one-time use token
 		 */
 		protected function create_async_nonce() {
-			$action = $this->action;
-			if ( substr( $action, 0, 7 ) === 'nopriv_' ) {
-				$action = substr( $action, 7 );
-			}
-			$action = "wp_async_$action";
+			$action = $this->get_nonce_action();
 			$i      = wp_nonce_tick();
 
 			return substr( wp_hash( $i . $action . get_class( $this ), 'nonce' ), - 12, 10 );
@@ -184,11 +180,7 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		 * @return bool Whether the nonce check passed or failed
 		 */
 		protected function verify_async_nonce( $nonce ) {
-			$action = $this->action;
-			if ( substr( $action, 0, 7 ) === 'nopriv_' ) {
-				$action = substr( $action, 7 );
-			}
-			$action = "wp_async_$action";
+			$action = $this->get_nonce_action();
 			$i      = wp_nonce_tick();
 
 			// Nonce generated 0-12 hours ago
@@ -203,6 +195,15 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 
 			// Invalid nonce
 			return false;
+		}
+
+		protected function get_nonce_action() {
+			$action = $this->action;
+			if ( substr( $action, 0, 7 ) === 'nopriv_' ) {
+				$action = substr( $action, 7 );
+			}
+			$action = "wp_async_$action";
+			return $action;
 		}
 
 		/**
