@@ -79,7 +79,7 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 			}
 
 			$data['action'] = "wp_async_$this->action";
-			$data['_nonce'] = $this->create_async_nonce( "wp_async_$this->action" );
+			$data['_nonce'] = $this->create_async_nonce();
 
 			$this->_body_data = $data;
 
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		 * @uses wp_die()
 		 */
 		public function handle_postback() {
-			if ( isset( $_POST['_nonce'] ) && $this->verify_async_nonce( $_POST['_nonce'], "wp_async_$this->action" ) ) {
+			if ( isset( $_POST['_nonce'] ) && $this->verify_async_nonce( $_POST['_nonce'] ) ) {
 				if ( ! is_user_logged_in() ) {
 					$this->action = "nopriv_$this->action";
 				}
@@ -159,11 +159,16 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		 *
 		 * @return string The one-time use token
 		 */
-		protected function create_async_nonce( $action = -1 ) {
+		protected function create_async_nonce() {
+			$action = $this->action;
+			if ( substr( $action, 0, 7 ) === 'nopriv_' ) {
+				$action = substr( $action, 7 );
+			}
+			$action = "wp_async_$action";
+			$i      = wp_nonce_tick();
 			if ( is_user_logged_in() ) {
 				return wp_create_nonce( $action );
 			}
-			$i = wp_nonce_tick();
 
 			return substr( wp_hash( $i . $action, 'nonce' ), - 12, 10 );
 		}
@@ -181,11 +186,16 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		 *
 		 * @return bool Whether the nonce check passed or failed
 		 */
-		protected function verify_async_nonce( $nonce, $action = -1 ) {
+		protected function verify_async_nonce( $nonce ) {
+			$action = $this->action;
+			if ( substr( $action, 0, 7 ) === 'nopriv_' ) {
+				$action = substr( $action, 7 );
+			}
+			$action = "wp_async_$action";
+			$i      = wp_nonce_tick();
 			if ( is_user_logged_in() ) {
 				return wp_verify_nonce( $nonce, $action );
 			}
-			$i = wp_nonce_tick();
 
 			// Nonce generated 0-12 hours ago
 			if ( substr( wp_hash( $i . $action, 'nonce' ), - 12, 10 ) == $nonce ) {
