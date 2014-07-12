@@ -10,10 +10,25 @@
 if ( ! class_exists( 'WP_Async_Task' ) ) {
 	abstract class WP_Async_Task {
 
+		/**
+		 * Constant identifier for a task that should be available to logged-in users
+		 *
+		 * See constructor documentation for more details.
+		 */
 		const LOGGED_IN = 1;
 
+		/**
+		 * Constant identifier for a task that should be available to logged-out users
+		 *
+		 * See constructor documentation for more details.
+		 */
 		const LOGGED_OUT = 2;
 
+		/**
+		 * Constant identifier for a task that should be available to all users regardless of auth status
+		 *
+		 * See constructor documentation for more details.
+		 */
 		const BOTH = 3;
 
 		/**
