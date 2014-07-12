@@ -197,7 +197,7 @@ class WP_Async_Task_Tests extends TestCase {
 		$async = $this->getMockAsync( 'Async', array( 'verify_async_nonce', 'run_action' ) );
 		$async->shouldReceive( 'verify_async_nonce' )->never();
 		$async->shouldReceive( 'run_action' )->never();
-		WP_Mock::expectActionAdded( 'wp_die_handler', function () {
+		WP_Mock::expectFilterAdded( 'wp_die_handler', function () {
 			die();
 		} );
 		WP_Mock::wpFunction( 'wp_die', array( 'times' => 1 ) );
@@ -217,7 +217,7 @@ class WP_Async_Task_Tests extends TestCase {
 			->with( $nonce )
 			->andReturn( false );
 		$async->shouldReceive( 'run_action' )->never();
-		WP_Mock::expectActionAdded( 'wp_die_handler', function () {
+		WP_Mock::expectFilterAdded( 'wp_die_handler', function () {
 			die();
 		} );
 		WP_Mock::wpFunction( 'wp_die', array( 'times' => 1 ) );
@@ -241,7 +241,7 @@ class WP_Async_Task_Tests extends TestCase {
 		$async->shouldReceive( 'run_action' )
 			->once()
 			->with();
-		WP_Mock::expectActionAdded( 'wp_die_handler', function () {
+		WP_Mock::expectFilterAdded( 'wp_die_handler', function () {
 			die();
 		} );
 		WP_Mock::wpFunction( 'wp_die', array( 'times' => 1 ) );
@@ -268,7 +268,7 @@ class WP_Async_Task_Tests extends TestCase {
 		$async->shouldReceive( 'run_action' )
 			->once()
 			->with();
-		WP_Mock::expectActionAdded( 'wp_die_handler', function () {
+		WP_Mock::expectFilterAdded( 'wp_die_handler', function () {
 			die();
 		} );
 		WP_Mock::wpFunction( 'wp_die', array( 'times' => 1 ) );
