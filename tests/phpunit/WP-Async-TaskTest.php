@@ -11,7 +11,6 @@ class WP_Async_Task_Tests extends TestCase {
 		parent::setUp();
 		$_COOKIE = array();
 		$_POST   = array();
-		$this->setupGlobalFunctions();
 	}
 
 	public function tearDown() {
@@ -379,15 +378,6 @@ class WP_Async_Task_Tests extends TestCase {
 
 		$this->assertSame( 2, $verify_nonce->invoke( $async, $nonce ) );
 		$this->assertConditionsMet();
-	}
-
-	private function setupGlobalFunctions() {
-		WP_Mock::wpFunction( 'wp_nonce_tick', array( 'return' => 1, ) );
-		WP_Mock::wpFunction( 'wp_hash', array(
-			'return' => function ( $string ) {
-					return md5( $string );
-				},
-		) );
 	}
 
 	/**
