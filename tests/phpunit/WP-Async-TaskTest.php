@@ -338,7 +338,7 @@ class WP_Async_Task_Tests extends TestCase {
 		$nonce = substr( $hash, - 12, 10 );
 		WP_Mock::wpFunction( 'wp_hash', array(
 			'times'  => 1,
-			'args'   => $nonce_tick . 'wp_async_async' . get_class( $async ),
+			'args'   => array( $nonce_tick . 'wp_async_async' . get_class( $async ), 'nonce' ),
 			'return' => function ( $thing ) {
 					return md5( $thing );
 				}
@@ -363,14 +363,14 @@ class WP_Async_Task_Tests extends TestCase {
 		$nonce = substr( $hash, - 12, 10 );
 		WP_Mock::wpFunction( 'wp_hash', array(
 			'times'  => 1,
-			'args'   => $nonce_tick . 'wp_async_async' . get_class( $async ),
+			'args'   => array( $nonce_tick . 'wp_async_async' . get_class( $async ), 'nonce' ),
 			'return' => function ( $thing ) {
 					return md5( $thing );
 				}
 		) );
 		WP_Mock::wpFunction( 'wp_hash', array(
 			'times'  => 1,
-			'args'   => $real_tick . 'wp_async_async' . get_class( $async ),
+			'args'   => array( $real_tick . 'wp_async_async' . get_class( $async ), 'nonce' ),
 			'return' => function ( $thing ) {
 					return md5( $thing );
 				}
