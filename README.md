@@ -103,7 +103,7 @@ add_action( 'wp_async_save_post', 'really_slow_process', 10, 2 );
 
 To contribute, please fork the github repository and submit a pull request.
 
-To run the unit test suite, make sure you've [installed composer](https://getcomposer.org/doc/00-intro.md) and install the test tools by running
+When submitting pull requests, please make sure your changes do not cause any unit tests to fail. To run the unit test suite, make sure you've [installed composer](https://getcomposer.org/doc/00-intro.md) and install the test tools by running
 
 ```sh
 composer install
