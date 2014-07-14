@@ -165,12 +165,8 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		 * Based entirely on wp_create_nonce() but does not tie the nonce to the
 		 * current logged-in user.
 		 *
-		 * @uses is_user_logged_in()
-		 * @uses wp_create_nonce()
 		 * @uses wp_nonce_tick()
 		 * @uses wp_hash()
-		 *
-		 * @param string|int $action Scalar value to add context to the nonce.
 		 *
 		 * @return string The one-time use token
 		 */
@@ -184,13 +180,10 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		/**
 		 * Verify that the correct nonce was used within the time limit.
 		 *
-		 * @uses is_user_logged_in()
-		 * @uses wp_verify_nonce()
 		 * @uses wp_nonce_tick()
 		 * @uses wp_hash()
 		 *
-		 * @param string     $nonce  Nonce to be verified
-		 * @param string|int $action Provides context to what is taking place
+		 * @param string $nonce Nonce to be verified
 		 *
 		 * @return bool Whether the nonce check passed or failed
 		 */
@@ -212,6 +205,11 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 			return false;
 		}
 
+		/**
+		 * Get a nonce action based on the $action property of the class
+		 *
+		 * @return string The nonce action for the current instance
+		 */
 		protected function get_nonce_action() {
 			$action = $this->action;
 			if ( substr( $action, 0, 7 ) === 'nopriv_' ) {
