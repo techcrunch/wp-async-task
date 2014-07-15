@@ -98,7 +98,9 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 
 			$this->_body_data = $data;
 
-			add_action( 'shutdown', array( $this, 'launch_on_shutdown' ) );
+			if ( ! has_action( 'shutdown', array( $this, 'launch_on_shutdown' ) ) ) {
+				add_action( 'shutdown', array( $this, 'launch_on_shutdown' ) );
+			}
 		}
 
 		/**
