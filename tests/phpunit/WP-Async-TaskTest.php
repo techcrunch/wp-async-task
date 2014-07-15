@@ -106,6 +106,12 @@ class WP_Async_Task_Tests extends TestCase {
 		$body_data = new ReflectionProperty( 'Async', '_body_data' );
 		$body_data->setAccessible( true );
 
+		WP_Mock::wpFunction( 'has_action', array(
+			'times'  => 1,
+			'args'   => array( 'shutdown', array( $async, 'launch_on_shutdown' ) ),
+			'return' => false,
+		) );
+
 		WP_Mock::expectActionAdded( 'shutdown', array( $async, 'launch_on_shutdown' ) );
 
 		/** @var Async $async */
