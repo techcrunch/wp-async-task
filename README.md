@@ -44,7 +44,7 @@ The protected `$action` property should be set to the action to which you wish t
 
 #### `prepare_data( $data )`
 
-Use this method to prepare the action's data for use in the asynchronous process. Data will be given to `prepare_data()` as an indexed, just as it would if you used `func_get_args()` to get a function's arguments. This method needs to return an array containing the data in a more useful format. Since these values will be sent in a `POST` request, it's advisable to stick to scalar values for the most part. For example, on `'save_post'`, the action provides `$post_id` and the `$post` object, so we might do this:
+Use this method to prepare the action's data for use in the asynchronous process. Data will be given to `prepare_data()` as an indexed array, just as it would if you used `func_get_args()` to get a function's arguments. This method needs to return an array containing the data in a more useful format. Since these values will be sent in a `POST` request, it's advisable to stick to scalar values for the most part. For example, on `'save_post'`, the action provides `$post_id` and the `$post` object, so we might do this:
 
 ```php
 protected function prepare_data($data){
