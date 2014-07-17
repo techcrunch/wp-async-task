@@ -2,7 +2,7 @@
 	"name"             : "techcrunch/wp-async-task",
 	"description"      : "Run asynchronous tasks for long-running operations in WordPress",
 	"minimum-stability": "dev",
-	"license"          : "GPL-2.0+",
+	"license"          : "MIT",
 	"type"             : "wordpress-plugin",
 	"authors"          : [
 		{

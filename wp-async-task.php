@@ -4,7 +4,7 @@
  * Version: 1.0
  * Description: Creates an abstract class to execute asynchronous tasks
  * Author: 10up, Eric Mann, Luke Gedeon, John P. Bloch
- * License: GPLv2
+ * License: MIT
  */
 
 if ( ! class_exists( 'WP_Async_Task' ) ) {
