@@ -4,7 +4,7 @@ TechCrunch WP Asynchronous Tasks plugin for TechCrunch.com
 
 ## Quick Start
 
-WP Async Task can be installed as a plugin or bundled in other plugins or a theme. The class definition is wrapped in a `class_exists` check, so it will never run the risk of accidentally defined twice. Just make sure that the plugin file is being included somehow.
+WP Async Task can be installed as a plugin or bundled in other plugins or a theme. The class definition is wrapped in a `class_exists` check, so it will never run the risk of being accidentally defined twice. Just make sure that the plugin file is being included somehow.
 
 Next, you need to extend the class with your own implementation. Implementations of the class act on an arbitrary action (e.g., `'save_post'`, etc). There are three parts that **must** be present in any class extending `WP_Async_Task`:
 
