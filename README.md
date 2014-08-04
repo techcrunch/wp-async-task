@@ -73,7 +73,7 @@ The library will handle catching the exception and will prevent the request from
 This method is responsible for running whatever action should trigger the functions that need to run inside the asynchronous request. The convention is to use `"wp_async_$this->action"`, but that is up to the implementation.
 
 ```php
-protected method run_action() {
+protected function run_action() {
 	$post_id = $_POST['post_id'];
 	$post = get_post( $post_id );
 	if ( $post ) {
