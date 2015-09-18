@@ -41,6 +41,13 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 		protected $argument_count = 20;
 
 		/**
+		 * Priority to fire intermediate action.
+		 *
+		 * @var int
+		 */
+		protected $priority = 10;
+
+		/**
 		 * @var string
 		 */
 		protected $action;
@@ -70,7 +77,7 @@ if ( ! class_exists( 'WP_Async_Task' ) ) {
 			if ( empty( $this->action ) ) {
 				throw new Exception( 'Action not defined for class ' . __CLASS__ );
 			}
-			add_action( $this->action, array( $this, 'launch' ), 10, (int) $this->argument_count );
+			add_action( $this->action, array( $this, 'launch' ), (int) $this->priority, (int) $this->argument_count );
 			if ( $auth_level & self::LOGGED_IN ) {
 				add_action( "admin_post_wp_async_$this->action", array( $this, 'handle_postback' ) );
 			}
