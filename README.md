@@ -33,7 +33,7 @@ class JPB_Async_Task extends WP_Async_Task {
 	/**
 	 * Run the async task action
 	 */
-	protected function run_action( $data ) {}
+	protected function run_action() {}
 
 }
 ```
